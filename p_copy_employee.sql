@@ -1,0 +1,10 @@
+CREATE OR REPLACE PROCEDURE P_COPY_EMPLOYEE IS
+  v_count NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_count FROM user_tables WHERE table_name = 'MYEMPLOYEE_UPDATE';
+  IF v_count > 0 THEN
+    EXECUTE IMMEDIATE 'DROP TABLE MyEmployee_update';
+  END IF;
+  EXECUTE IMMEDIATE 'CREATE TABLE MyEmployee_update AS SELECT * FROM MyEmployee';
+END;
+/
